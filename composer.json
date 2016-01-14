@@ -7,9 +7,8 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-	    "tymon/jwt-auth": "0.5.*",
         "dingo/api": "1.0.*@dev",
-        "barryvdh/laravel-cors": "^0.7.1"
+        "lucadegasperi/oauth2-server-laravel": "5.0.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -35,8 +34,7 @@
             "php artisan clear-compiled",
             "php artisan optimize",
             "php -r \"copy('.env.example', '.env');\"",
-            "php artisan key:generate",
-            "php artisan jwt:generate"
+            "php artisan key:generate"
         ],
         "pre-update-cmd": [
             "php artisan clear-compiled"
