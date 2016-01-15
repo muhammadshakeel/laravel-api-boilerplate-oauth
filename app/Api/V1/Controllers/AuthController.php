@@ -2,44 +2,63 @@
 
 namespace App\Api\V1\Controllers;
 
-use JWTAuth;
+use Authorizer;
 use Validator;
 use Config;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Message;
-use Dingo\Api\Routing\Helpers;
-use App\Http\Controllers\Controller;
+use App\Api\V1\Controllers\BaseController as Controller;
 use Illuminate\Support\Facades\Password;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Dingo\Api\Exception\ValidationHttpException;
 
 class AuthController extends Controller
 {
-    use Helpers;
+    /**
+     * To get common validation rules for login and fblogin
+     *
+     * @return array
+     */
+    public function getLoginValidationRules()
+    {
+        return [
+            'grant_type'    => 'required',
+            'client_id'     => 'required',
+            'client_secret' => 'required',
+            'username'      => 'required|email',
+        ];
+    }
 
+    /**
+     * Verify user credentials and generates authentication token
+     *
+     * @Get("/login")
+     * @Versions({"v1"})
+     *
+     * @Request({"grant_type":"password", "client_id":"{{client_id}}", "client_secret":"{{client_secret}}", "username":"fake@fake.com", "password":"secret"})
+     *
+     * @Response(200, body={"access_token":"{{generated_token}}","token_type":"Bearer","expires_in":86400})
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function login(Request $request)
     {
-        $credentials = $request->only(['email', 'password']);
+        $credentials = $request->only(['grant_type', 'client_id', 'client_secret', 'username', 'password']);
 
-        $validator = Validator::make($credentials, [
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-
-        if($validator->fails()) {
-            throw new ValidationHttpException($validator->errors()->all());
-        }
+        $validationRules = $this->getLoginValidationRules();
+        $validationRules['password'] = 'required';
+        $this->validateOrFail($credentials, $validationRules);
 
         try {
-            if (! $token = JWTAuth::attempt($credentials)) {
+            if (! $accessToken = Authorizer::issueAccessToken()) {
                 return $this->response->errorUnauthorized();
             }
-        } catch (JWTException $e) {
+        } catch (\League\OAuth2\Server\Exception\OAuthException $e) {
+            throw $e;
             return $this->response->error('could_not_create_token', 500);
         }
 
-        return response()->json(compact('token'));
+        return response()->json(compact('accessToken'));
     }
 
     public function signup(Request $request)
@@ -66,7 +85,7 @@ class AuthController extends Controller
         if($hasToReleaseToken) {
             return $this->login($request);
         }
-        
+
         return $this->response->created();
     }
 
@@ -107,7 +126,7 @@ class AuthController extends Controller
         if($validator->fails()) {
             throw new ValidationHttpException($validator->errors()->all());
         }
-        
+
         $response = Password::reset($credentials, function ($user, $password) {
             $user->password = $password;
             $user->save();
