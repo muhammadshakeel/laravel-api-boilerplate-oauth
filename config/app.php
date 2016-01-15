@@ -140,9 +140,11 @@ return [
         /*
          * Third Party Providers...
          */
-        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,
-        Barryvdh\Cors\ServiceProvider::class,
+        // Authentication providers
+        LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider::class,
+        LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider::class,
+        App\Providers\OAuthServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -150,7 +152,8 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class
+        App\Providers\RouteServiceProvider::class,
+        App\Repositories\RepositoryServiceProvider::class,
     ],
 
     /*
@@ -203,8 +206,8 @@ return [
         /*
          * Third Party Facades...
          */
-        'JWTAuth'       => Tymon\JWTAuth\Facades\JWTAuth::class,
-        'JWTFactory'    => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'API'       => Dingo\Api\Facade\API::class,
+        'Authorizer'=> LucaDegasperi\OAuth2Server\Facades\Authorizer::class,
     ],
 
 ];
