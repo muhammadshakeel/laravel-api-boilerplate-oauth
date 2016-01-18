@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Mail\Message;
 use App\Api\V1\Controllers\BaseController as Controller;
 use Illuminate\Support\Facades\Password;
+use Dingo\Api\Exception\ValidationHttpException;
 
 class AuthController extends Controller
 {
