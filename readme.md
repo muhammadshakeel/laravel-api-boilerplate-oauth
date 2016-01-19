@@ -1,5 +1,5 @@
 ## Laravel API Boilerplate (OAuth2 Edition)
-
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/b7b5fed8a7ed4981a5276f5af21161e7)](https://www.codacy.com/app/mshakeel/laravel-api-boilerplate-oauth)
 ### Based on [francescomalatesta/laravel-api-boilerplate-jwt](https://github.com/francescomalatesta/laravel-api-boilerplate-jwt)
 
 Laravel API Boilerplate is a ready-to-use "starting pack" that you can use to build your first API in seconds. As you can easily imagine, it is built on top of the awesome Laravel Framework.
