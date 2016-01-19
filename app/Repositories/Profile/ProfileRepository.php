@@ -40,14 +40,4 @@ class ProfileRepository implements ProfileRepositoryInterface
             $this->throwStoreResourceFailedException();
         }
     }
-
-    public function updateLocation($userId, $lat, $lng)
-    {
-        $profile = $this->findByUserId($userId);
-
-        $profile->cur_lat = $lat;
-        $profile->cur_lng = $lng;
-
-        return $profile->save();
-    }
 }
