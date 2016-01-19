@@ -13,8 +13,14 @@ With a similar foundation is really easy to get up and running in no time. I jus
 
 ## Installation
 
-* _git clone_ the repository;
-* composer install;
+* _git clone_ the repository
+* composer install,
+* php -r "copy('.env.example', '.env');"
+* php artisan key:generate
+* chmod -R 777 storage/ bootstrap/cache/
+* php artisan vendor:publish
+* php artisan migrate
+* php artisan db:seed --class=ClientTableSeeder
 
 Done!
 
