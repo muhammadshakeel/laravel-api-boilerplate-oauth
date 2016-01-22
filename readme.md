@@ -1,4 +1,5 @@
 ## Laravel API Boilerplate (OAuth2 Edition)
+[![Latest Stable Version](https://poser.pugx.org/muhammadshakeel/laravel-api-boilerplate-oauth/v/stable)](https://packagist.org/packages/muhammadshakeel/laravel-api-boilerplate-oauth) [![Total Downloads](https://poser.pugx.org/muhammadshakeel/laravel-api-boilerplate-oauth/downloads)](https://packagist.org/packages/muhammadshakeel/laravel-api-boilerplate-oauth) [![Latest Unstable Version](https://poser.pugx.org/muhammadshakeel/laravel-api-boilerplate-oauth/v/unstable)](https://packagist.org/packages/muhammadshakeel/laravel-api-boilerplate-oauth) [![License](https://poser.pugx.org/muhammadshakeel/laravel-api-boilerplate-oauth/license)](https://packagist.org/packages/muhammadshakeel/laravel-api-boilerplate-oauth)
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/b7b5fed8a7ed4981a5276f5af21161e7)](https://www.codacy.com/app/mshakeel/laravel-api-boilerplate-oauth)
 ### Based on [francescomalatesta/laravel-api-boilerplate-jwt](https://github.com/francescomalatesta/laravel-api-boilerplate-jwt)
 
