@@ -14,8 +14,8 @@ With a similar foundation is really easy to get up and running in no time. I jus
 
 ## Installation
 
-* _git clone_ the repository
-* composer install,
+* composer create-project muhammadshakeel/laravel-api-boilerplate-oauth your-project
+* cd your-project
 * php -r "copy('.env.example', '.env');"
 * php artisan key:generate
 * chmod -R 777 storage/ bootstrap/cache/
